@@ -1,6 +1,6 @@
 
 
-import unit
+import unittest
 from updatedvalidateuser import validate_user
 
 class TestValidateUser(unittest.TestCase):
