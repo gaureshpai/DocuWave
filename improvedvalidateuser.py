@@ -1,7 +1,6 @@
-#!/usr/bin/env python3
 
-import unittest
 
+import unit
 from updatedvalidateuser import validate_user
 
 class TestValidateUser(unittest.TestCase):
@@ -15,9 +14,7 @@ class TestValidateUser(unittest.TestCase):
     self.assertEqual(validate_user("invalid_user", 1), False)
   def test_invalid_minlen(self):
     self.assertRaises(ValueError, validate_user, "user", -1)
-
-
-# Run the tests
+    
 unittest.main()
 
 
