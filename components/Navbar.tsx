@@ -1,25 +1,37 @@
-import React from 'react';
 import '../public/styles/Navbar.css';
+import Link from "next/link";
+import Image from "next/image";
 
-const Navbar: React.FC = () => {
+export default function Navbar() {
   return (
-    <nav className="navbar">
-      <div className="navbar-left">
-        <a href="#" className="navbar-logo">PDF-Reader</a>
-      </div>
-      <div className="navbar-right">
-        <div className="dropdown">
-          <button type="button" className="dropbtn">Links</button>
-          <div className="dropdown-content">
-            <a href="https://github.com/gaureshpai">GitHub</a>
-            <a href="https://linkedin.com/in/gaureshpai">LinkedIn</a>
-            <a href="https://twitter.com/hseruag">Twitter</a>
-            <a href="https://youtube.com/@hseruag">YouTube</a>
-          </div>
+    <nav className="bg-blue-800">
+      <div className="container mx-auto flex justify-between items-center p-4">
+        <div className="flex items-center"> {/* New div to contain the logo and text */}
+          <a href="/" className="titleb"> {/* Anchor tag wrapping both Image and Link */}
+            <Image
+              src=""
+              alt="GGReplicater Logo"
+              width={32}  // Set the width of the image
+              height={32} // Set the height of the image
+              className="mr-2" // Add margin to separate the logo from the text
+            />
+            GGReplicater
+          </a>
+        </div>
+
+        <div className="button-container">
+          {/* Buttons for website, Twitter, and GitHub */}
+          <a href="https://gauresh.vercel.app" target="_blank" rel="noopener noreferrer" className="buttons">
+            Website
+          </a>
+          <a href="https://twitter.com/hseruag" target="_blank" rel="noopener noreferrer" className="buttons">
+            Twitter
+          </a>
+          <a href="https://github.com/gaureshpai" target="_blank" rel="noopener noreferrer" className="buttons">
+            GitHub
+          </a>
         </div>
       </div>
     </nav>
   );
 }
-
-export default Navbar;
