@@ -11,14 +11,14 @@ export default function Navbar() {
         </div>
         <div className="flex-1 flex justify-center items-center space-x-2">
           
-          <span className="titleb"><a href="/">
+          <span className="titleb">
             <Image
               src="https://raw.githubusercontent.com/gaureshpai/PDF-Reader/main/public/pdf%20reader.png"
               alt="Pdf Reader Logo"
               width={32}
               height={32}
             />
-          </a>Pdf Reader</span>
+            <a href="/"></a>Pdf Reader</span>
         </div>
         <div className="flex flex-1 justify-end button-container">
           <a href="https://gauresh.vercel.app" target="_blank" rel="noopener noreferrer" className="buttons">
