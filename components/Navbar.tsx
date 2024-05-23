@@ -4,23 +4,23 @@ import Image from "next/image";
 
 export default function Navbar() {
   return (
-    <nav className="bg-blue-800">
-      <div className="container mx-auto flex justify-between items-center p-4">
-        <div className="flex items-center"> {/* New div to contain the logo and text */}
-          <a href="/" className="titleb"> {/* Anchor tag wrapping both Image and Link */}
-            <Image
-              src=""
-              alt="GGReplicater Logo"
-              width={32}  // Set the width of the image
-              height={32} // Set the height of the image
-              className="mr-2" // Add margin to separate the logo from the text
-            />
-            GGReplicater
-          </a>
+    <nav className="bg-primary-color shadow-lg">
+      <div className="container mx-auto flex justify-between items-center py-4 px-6">
+        <div className="flex flex-1 justify-start items-center space-x-6">
+          {/* Left side empty */}
         </div>
-
-        <div className="button-container">
-          {/* Buttons for website, Twitter, and GitHub */}
+        <div className="flex-1 flex justify-center items-center space-x-2">
+          
+          <span className="titleb"><a href="/">
+            <Image
+              src="https://raw.githubusercontent.com/gaureshpai/PDF-Reader/main/public/pdf%20reader.png"
+              alt="Pdf Reader Logo"
+              width={32}
+              height={32}
+            />
+          </a>Pdf Reader</span>
+        </div>
+        <div className="flex flex-1 justify-end button-container">
           <a href="https://gauresh.vercel.app" target="_blank" rel="noopener noreferrer" className="buttons">
             Website
           </a>
