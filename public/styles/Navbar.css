@@ -1,9 +1,7 @@
-/* Tailwind CSS directives */
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
-/* Custom CSS variables for color scheme */
 :root {
   --foreground-color: rgb(0, 0, 0);
   --background-start-color: #f3f4f6;
@@ -13,7 +11,6 @@
   --title-hover-color: #f3f87a;
 }
 
-/* Dark mode */
 @media (prefers-color-scheme: dark) {
   :root {
     --foreground-color: rgb(255, 255, 255);
@@ -25,7 +22,6 @@
   }
 }
 
-/* General styles */
 body {
   font-family: 'Arial', sans-serif;
   background: linear-gradient(to right, var(--background-start-color), var(--background-end-color));
@@ -40,14 +36,12 @@ button:focus {
   outline: none;
 }
 
-/* Navigation styles */
 nav {
   background-color: var(--primary-color);
   color: white;
   padding: 1rem;
 }
 
-/* Navbar title */
 .titleb {
   display: flex;
   align-items: center;
@@ -63,7 +57,6 @@ nav {
   text-decoration: none;
 }
 
-/* Button container styles */
 .button-container {
   display: flex;
   flex-direction: row;

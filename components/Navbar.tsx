@@ -7,7 +7,6 @@ export default function Navbar() {
     <nav className="bg-primary-color shadow-lg">
       <div className="container mx-auto flex justify-between items-center py-4 px-6">
         <div className="flex flex-1 justify-start items-center space-x-6">
-          {/* Left side empty */}
         </div>
         <div className="flex-1 flex justify-center items-center space-x-2">
           

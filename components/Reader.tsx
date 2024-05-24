@@ -50,7 +50,7 @@ const Reader = () => {
 
   const handleReadPdf = async () => {
     if (!speaking && pdfFiles.length > 0) {
-      const pdfFile = pdfFiles[0]; // Assuming only one PDF file is handled
+      const pdfFile = pdfFiles[0];
       try {
         setLoading(true);
         const text = await readPdfContent(pdfFile);

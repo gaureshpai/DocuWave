@@ -1,3 +1,26 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --foreground-color: rgb(0, 0, 0);
+  --background-start-color: #f3f4f6;
+  --background-end-color: #ffffff;
+  --primary-color: #4f46e5;
+  --hover-color: #6b63ff;
+  --title-hover-color: #f3f87a;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --foreground-color: rgb(255, 255, 255);
+    --background-start-color: #111827;
+    --background-end-color: #1f2937;
+    --primary-color: #7c3aed;
+    --hover-color: #9561e2;
+    --title-hover-color: #f3f87a;
+  }
+}
 .reader-container {
     display: flex;
     flex-direction: column;
@@ -30,7 +53,6 @@
     display: flex;
     justify-content: center;
     margin-bottom: 20px;
-    /* Add margin to separate from PDF container */
 }
 
 .nav-button {
@@ -56,7 +78,6 @@
     justify-content: center;
     align-items: center;
     overflow-x: auto;
-    /* Enable horizontal scrolling */
 }
 
 .pdf-container p {
@@ -75,7 +96,5 @@
 
 .pdf-page {
     width: 100%;
-    /* Each page takes up the full width of the container */
     max-width: 800px;
-    /* Optional: Set a maximum width for each page */
 }

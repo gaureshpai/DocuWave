@@ -3,7 +3,7 @@ import React from 'react';
 import Link from 'next/link';
 
 const Footer = () => {
-  const currentYear = new Date().getFullYear(); // Get the current year dynamically
+  const currentYear = new Date().getFullYear();
 
   return (
     <footer className="bg-gradient-to-r from-primary-color to-secondary-color text-white py-6">
