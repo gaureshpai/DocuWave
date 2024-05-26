@@ -25,6 +25,8 @@
     display: flex;
     flex-direction: column;
     align-items: center;
+    min-height: 75vh;
+    overflow-x: hidden;
 }
 
 .upload-container {
@@ -96,5 +98,6 @@
 
 .pdf-page {
     width: 100%;
-    max-width: 800px;
+    min-width: 720px;
+    min-height: 1200px;
 }

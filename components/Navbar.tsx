@@ -12,7 +12,7 @@ export default function Navbar() {
           
           <span className="titleb">
             <Image
-              src="https://raw.githubusercontent.com/gaureshpai/PDF-Reader/main/public/pdf%20reader.png"
+              src="/pdf%20reader.png"
               alt="Pdf Reader Logo"
               width={32}
               height={32}
