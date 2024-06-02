@@ -9,7 +9,7 @@ const Footer = () => {
     <footer className="bg-gradient-to-r from-primary-color to-secondary-color text-white py-6">
       <div className="container mx-auto flex flex-col md:flex-row justify-center items-center">
         <div>
-          <p className="text-sm text-center">&copy; {currentYear} Gauresh. All rights reserved.</p>
+          <center><p className="text-sm text-center">&copy; {currentYear} Gauresh. All rights reserved.</p></center>
         </div>
       </div>
     </footer>

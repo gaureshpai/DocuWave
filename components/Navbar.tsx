@@ -29,6 +29,9 @@ export default function Navbar() {
           <a href="https://github.com/gaureshpai" target="_blank" rel="noopener noreferrer" className="buttons">
             GitHub
           </a>
+          <a href="https://linkedin.com/in/gaureshpai" target='_blank' rel='noopener noreferrer' className='buttons' >
+            Linkedin
+          </a>
         </div>
       </div>
     </nav>
