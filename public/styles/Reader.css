@@ -21,6 +21,7 @@
     --title-hover-color: #f3f87a;
   }
 }
+
 .reader-container {
     display: flex;
     flex-direction: column;
