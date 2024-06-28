@@ -13,11 +13,11 @@ export default function Navbar() {
           <Link href="/" className="titleb">
             <Image
               src="/pdf%20reader.png"
-              alt="Pdf Reader Logo"
+              alt="DocuWave Logo"
               width={32}
               height={32}
             />
-            Pdf Reader
+            DocuWave
           </Link>
           </span>
         </div>
