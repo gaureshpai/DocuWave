@@ -1,5 +1,6 @@
 import '../public/styles/Navbar.css';
 import Image from "next/image";
+import Link from 'next/link';
 
 export default function Navbar() {
   return (
@@ -7,30 +8,32 @@ export default function Navbar() {
       <div className="container mx-auto flex justify-between items-center py-4 px-6">
         <div className="flex flex-1 justify-start items-center space-x-6">
         </div>
-        <div className="flex-1 flex justify-center items-center space-x-2">
-          
-          <span className="titleb">
+        <div className="flex-1 flex justify-center items-center space-x-2 text-decoration:none;">
+          <span className='titleb'>
+          <Link href="/" className="titleb">
             <Image
               src="/pdf%20reader.png"
               alt="Pdf Reader Logo"
               width={32}
               height={32}
             />
-            <a href="/"></a>Pdf Reader</span>
+            Pdf Reader
+          </Link>
+          </span>
         </div>
         <div className="flex flex-1 justify-end button-container">
-          <a href="https://gauresh.vercel.app" target="_blank" rel="noopener noreferrer" className="buttons">
+          <Link href="https://gauresh.vercel.app" target="_blank" rel="noopener noreferrer" className="buttons">
             Website
-          </a>
-          <a href="https://twitter.com/hseruag" target="_blank" rel="noopener noreferrer" className="buttons">
+          </Link>
+          <Link href="https://twitter.com/hseruag" target="_blank" rel="noopener noreferrer" className="buttons">
             Twitter
-          </a>
-          <a href="https://github.com/gaureshpai" target="_blank" rel="noopener noreferrer" className="buttons">
+          </Link>
+          <Link href="https://github.com/gaureshpai" target="_blank" rel="noopener noreferrer" className="buttons">
             GitHub
-          </a>
-          <a href="https://linkedin.com/in/gaureshpai" target='_blank' rel='noopener noreferrer' className='buttons' >
+          </Link>
+          <Link href="https://linkedin.com/in/gaureshpai" target='_blank' rel='noopener noreferrer' className='buttons' >
             Linkedin
-          </a>
+          </Link>
         </div>
       </div>
     </nav>

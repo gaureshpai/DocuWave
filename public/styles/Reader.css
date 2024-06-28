@@ -103,3 +103,27 @@
     min-width: 720px;
     min-height: 1200px;
 }
+.upload-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+.upload-label {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    font-weight: bold;
+    cursor: pointer;
+    margin-bottom: 10px;
+}
+
+.upload-label input {
+    display: none;
+}
+
+.error {
+    color: red;
+    margin-top: 10px;
+}
