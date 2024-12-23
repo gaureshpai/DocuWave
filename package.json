@@ -11,18 +11,18 @@
   "dependencies": {
     "@react-pdf/renderer": "^4.1.5",
     "assemblyai": "^4.8.0",
-    "axios": "^1.7.8",
-    "next": "15.0.3",
-    "openai": "^4.73.1",
-    "pdfjs-dist": "^4.8.69",
-    "react": "^18",
-    "react-dom": "^18",
-    "react-pdf": "^9.1.1"
+    "axios": "^1.7.9",
+    "next": "15.1.2",
+    "openai": "^4.77.0",
+    "pdfjs-dist": "^4.9.155",
+    "react": "^19",
+    "react-dom": "^19",
+    "react-pdf": "^9.2.1"
   },
   "devDependencies": {
     "@types/node": "^22",
-    "@types/react": "^18",
-    "@types/react-dom": "^18",
+    "@types/react": "^19",
+    "@types/react-dom": "^19",
     "typescript": "^5"
   }
 }
