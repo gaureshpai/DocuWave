@@ -9,12 +9,12 @@
     "lint": "next lint"
   },
   "dependencies": {
-    "@react-pdf/renderer": "^4.1.5",
+    "@react-pdf/renderer": "^4.1.6",
     "assemblyai": "^4.8.0",
     "axios": "^1.7.9",
-    "next": "15.1.2",
-    "openai": "^4.77.0",
-    "pdfjs-dist": "^4.9.155",
+    "next": "15.1.4",
+    "openai": "^4.77.4",
+    "pdfjs-dist": "^4.10.38",
     "react": "^19",
     "react-dom": "^19",
     "react-pdf": "^9.2.1"
