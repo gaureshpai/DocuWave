@@ -12,7 +12,7 @@
     "@react-pdf/renderer": "^4.1.6",
     "assemblyai": "^4.8.0",
     "axios": "^1.7.9",
-    "next": "15.1.5",
+    "next": "15.1.6",
     "openai": "^4.77.4",
     "pdfjs-dist": "^4.10.38",
     "react": "^19",
