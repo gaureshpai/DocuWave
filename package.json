@@ -13,7 +13,7 @@
     "assemblyai": "^4.8.0",
     "axios": "^1.7.9",
     "next": "15.1.5",
-    "openai": "^4.77.4",
+    "openai": "^4.80.1",
     "pdfjs-dist": "^4.10.38",
     "react": "^19",
     "react-dom": "^19",
