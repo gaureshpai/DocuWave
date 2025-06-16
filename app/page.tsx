@@ -1,14 +1,15 @@
-import React from 'react'
-import Navbar from "@/components/Navbar";
-import Footer from "@/components/Footer";
-import Reader from '@/components/Reader';
+import Navbar from "@/components/Navbar"
+import Footer from "@/components/Footer"
+import Reader from "@/components/Reader"
 
 const page = () => {
   return (
-    <div>
-        <Navbar />
-        <Reader/>
-        <Footer />
+    <div className="min-h-screen flex flex-col">
+      <Navbar />
+      <main className="flex-1">
+        <Reader />
+      </main>
+      <Footer />
     </div>
   )
 }

@@ -1,102 +1,176 @@
-'use client'
+"use client"
 
-import React, { useState, useRef, ChangeEvent } from 'react';
-import axios from 'axios';
-import ReaderPDF from './ReaderPDF';
-import ReaderButtons from './ReaderButtons';
-import ReaderFunctions from './ReaderFunctions';
-import '../public/styles/Reader.css';
+import { useState, type ChangeEvent } from "react"
+import ReaderPDF from "./ReaderPDF"
+import ReaderControls from "./ReaderControls"
+import ReaderUpload from "./ReaderUpload"
+import QuestionModal from "./QuestionModal"
+import { clearPDFContent } from "@/lib/ai-utils"
 
 const Reader = () => {
-    const [pdfFile, setPdfFile] = useState<string | null>(null);
-    const [pdfText, setPdfText] = useState<string>('');
-    const [error, setError] = useState<string | null>(null);
-    const [speaking, setSpeaking] = useState<boolean>(false);
-    const [searchTerm, setSearchTerm] = useState<string>('');
-    const [searchResult, setSearchResult] = useState<number | null>(null);
-    const pdfInputRef = useRef<HTMLInputElement>(null);
+  const [pdfFile, setPdfFile] = useState<string | null>(null)
+  const [pdfText, setPdfText] = useState<string>("")
+  const [error, setError] = useState<string | null>(null)
+  const [loading, setLoading] = useState<boolean>(false)
+  const [showQuestionModal, setShowQuestionModal] = useState<boolean>(false)
+  const [extractionInfo, setExtractionInfo] = useState<string>("")
+  const [textExtractionFailed, setTextExtractionFailed] = useState<boolean>(false)
+  const [geminiUploadSuccess, setGeminiUploadSuccess] = useState<boolean>(false)
 
-    const handlePdfUpload = async (event: ChangeEvent<HTMLInputElement>) => {
-        const file = event.target.files?.[0];
-        if (file && file.type === 'application/pdf') {
-            const fileURL = URL.createObjectURL(file);
-            setPdfFile(fileURL);
-            try {
-                const extractedText = await extractTextFromPDF(file);
-                setPdfText(extractedText);
-                setError(null);
-            } catch (error) {
-                console.error('Error extracting text from PDF:', error);
-                setError('Error extracting text from PDF. Please ensure the PDF is not encrypted and try again.');
-            }
-        } else {
-            setError('Please upload a valid PDF file.');
-        }
-    };
+  const handlePdfUpload = async (event: ChangeEvent<HTMLInputElement>) => {
+    const file = event.target.files?.[0]
+    if (!file) return
 
-    const extractTextFromPDF = async (file: File): Promise<string> => {
-        const formData = new FormData();
-        formData.append('file', file);
-        const API_KEY = 'YOUR_PDF_CO_API_KEY'; // Replace with your PDF.co API key
+    if (file.type !== "application/pdf") {
+      setError("Please upload a valid PDF file.")
+      return
+    }
+    
+    clearPDFContent()
 
+    setLoading(true)
+    setError(null)
+    setExtractionInfo("")
+    setTextExtractionFailed(false)
+    setGeminiUploadSuccess(false)
+    setPdfText("")
+
+    try {
+      const fileURL = URL.createObjectURL(file)
+      setPdfFile(fileURL)
+      
+      const geminiUploadPromise = (async () => {
         try {
-            const response = await axios.post('https://api.pdf.co/v1/pdf/convert/to/text', formData, {
-                headers: {
-                    'x-api-key': API_KEY,
-                    'Content-Type': 'multipart/form-data'
-                }
-            });
+          setExtractionInfo("🔄 Uploading PDF to Gemini AI for intelligent analysis...")
 
-            if (response.data && response.data.body) {
-                return response.data.body;
-            } else {
-                throw new Error('No text found in PDF response.');
-            }
-        } catch (error:any) {
-            console.error('Failed to extract text from PDF:', error.response ? error.response.data : error.message);
-            throw new Error('Failed to extract text from PDF.');
+          const geminiFormData = new FormData()
+          geminiFormData.append("file", file)
+
+          const geminiResponse = await fetch("/api/upload-pdf-to-gemini", {
+            method: "POST",
+            body: geminiFormData,
+          })
+
+          const geminiResult = await geminiResponse.json()
+
+          if (geminiResponse.ok) {
+            setGeminiUploadSuccess(true)
+            return true
+          } else {
+            console.error("Gemini upload failed:", geminiResult)
+            return false
+          }
+        } catch (error) {
+          console.error("Gemini upload error:", error)
+          return false
         }
-    };
+      })()
+      
+      const textExtractionPromise = (async () => {
+        try {
+          const formData = new FormData()
+          formData.append("file", file)
 
-    const handleTextToSpeech = () => {
-        if (!pdfText) return;
-        const utterance = new SpeechSynthesisUtterance(pdfText);
-        utterance.onstart = () => setSpeaking(true);
-        utterance.onend = () => setSpeaking(false);
-        speechSynthesis.speak(utterance);
-    };
+          const response = await fetch("/api/extract-text", {
+            method: "POST",
+            body: formData,
+          })
 
-    const handleSearch = () => {
-        // handle search
-    };
+          const result = await response.json()
 
-    const handleQuestion = () => {
-        // handle questions and retrieve answers from the PDF
-    };
+          if (response.ok && result.success) {
+            setPdfText(result.text)
+            return { success: true, text: result.text }
+          } else {
+            setTextExtractionFailed(true)
+            return { success: false, error: result.error }
+          }
+        } catch (error) {
+          setTextExtractionFailed(true)
+          return { success: false }
+        }
+      })()
+      
+      const [geminiSuccess, textResult] = await Promise.all([geminiUploadPromise, textExtractionPromise])
+      
+      if (geminiSuccess && textResult.success) {
+        setExtractionInfo(
+          `✅ PDF uploaded to Gemini AI successfully! AI question answering is now available. Text length: ${textResult.text.length} characters.`,
+        )
+      } else if (geminiSuccess && !textResult.success) {
+        setExtractionInfo(
+          `✅ PDF uploaded to Gemini AI successfully! AI features are available.`,
+        )
+      } else if (!geminiSuccess && textResult.success) {
+        setExtractionInfo(
+          `⚠️ Gemini AI upload failed, so AI questions are limited. Text was extracted successfully (${textResult.text.length} characters).`,
+        )
+      } else {
+        setExtractionInfo(`⚠️ Both AI upload had issues, but you can still view the PDF manually.`)
+      }
+    } catch (error) {
+      console.error("Error processing PDF:", error)
+      setExtractionInfo("⚠️ PDF processing failed, but you can still view the PDF manually.")
+    } finally {
+      setLoading(false)
+    }
+  }
 
-    return (
-        <div className="reader-container">
-            <ReaderFunctions
-                handlePdfUpload={handlePdfUpload}
-                error={error}
+  const handleQuestion = () => {
+    if (!geminiUploadSuccess && !pdfText) {
+      setError(
+        "AI questions are not available because both Gemini upload failed. Please try uploading the PDF again.",
+      )
+      return
+    }
+    setShowQuestionModal(true)
+  }
+
+  return (
+    <div className="min-h-[90vh] bg-gradient-to-br from-gray-50 to-gray-100">
+      <div className="container mx-auto px-4 py-8">
+        <div className="max-w-6xl mx-auto">
+          {!pdfFile && <ReaderUpload onPdfUpload={handlePdfUpload} error={error} loading={loading} />}
+
+          {extractionInfo && (
+            <div
+              className={`mb-6 p-4 border rounded-lg shadow-sm ${
+                textExtractionFailed && !geminiUploadSuccess
+                  ? "bg-yellow-50 border-yellow-200"
+                  : "bg-green-50 border-green-200"
+              }`}
+            >
+              <p
+                className={`text-sm ${textExtractionFailed && !geminiUploadSuccess ? "text-yellow-800" : "text-green-800"}`}
+              >
+                {extractionInfo}
+              </p>
+            </div>
+          )}
+
+          {pdfFile && (
+            <>
+              <ReaderControls
+                onQuestion={handleQuestion}
+                hasAI={geminiUploadSuccess}
+                textExtractionFailed={textExtractionFailed}
+              />
+
+              <ReaderPDF pdfFile={pdfFile} />
+            </>
+          )}
+
+          {showQuestionModal && (
+            <QuestionModal
+              pdfText={pdfText}
+              hasGeminiUpload={geminiUploadSuccess}
+              onClose={() => setShowQuestionModal(false)}
             />
-
-            <ReaderButtons
-                speaking={speaking}
-                searchTerm={searchTerm}
-                setSearchTerm={setSearchTerm}
-                handleTextToSpeech={handleTextToSpeech}
-                handleSearch={handleSearch}
-                handleQuestion={handleQuestion}
-            />
-
-            <ReaderPDF pdfFile={pdfFile} />
-
-            {searchResult !== null && (
-                <p className="error">Search term found on page {searchResult + 1}.</p>
-            )}
+          )}
         </div>
-    );
-};
+      </div>
+    </div>
+  )
+}
 
-export default Reader;
+export default Reader

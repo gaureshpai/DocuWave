@@ -7,6 +7,7 @@
   --background-start-color: #f3f4f6;
   --background-end-color: #ffffff;
   --primary-color: #4f46e5;
+  --secondary-color: #7c3aed;
   --hover-color: #6b63ff;
   --title-hover-color: #f3f87a;
 }
@@ -17,13 +18,14 @@
     --background-start-color: #111827;
     --background-end-color: #1f2937;
     --primary-color: #7c3aed;
+    --secondary-color: #4f46e5;
     --hover-color: #9561e2;
     --title-hover-color: #f3f87a;
   }
 }
 
 body {
-  font-family: 'Arial', sans-serif;
+  font-family: "Inter", sans-serif;
   background: linear-gradient(to right, var(--background-start-color), var(--background-end-color));
   color: var(--foreground-color);
   margin: 0;
@@ -31,32 +33,12 @@ body {
   box-sizing: border-box;
 }
 
+* {
+  box-sizing: border-box;
+}
+
 input:focus,
 button:focus {
-  outline: none;
-}
-
-footer {
-  background-color: var(--primary-color);
-  color: white;
-  padding: 1rem;
-}
-
-footer h2 {
-  font-size: 2rem;
-  font-weight: bold;
-}
-
-footer p {
-  font-size: 0.875rem;
-}
-
-footer a {
-  color: white;
-  text-decoration: none;
-  transition: color 0.3s ease;
-}
-
-footer a:hover {
-  color: var(--hover-color);
+  outline: 2px solid var(--primary-color);
+  outline-offset: 2px;
 }
